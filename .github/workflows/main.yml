@@ -39,7 +39,7 @@ jobs:
       run: |
         cd ffmpeg
         ./configure \
-          --toolchain=MSVC
+          --toolchain=msvc
           --target-os=mingw32 \
           --arch=x86_64 \
           --enable-gpl \

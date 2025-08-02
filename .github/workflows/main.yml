@@ -34,6 +34,8 @@ jobs:
 
     - name: Configure FFmpeg
       shell: msys2 {0}
+      env:
+        MSYSTEM: MINGW64
       run: |
         cd ffmpeg
         ./configure \

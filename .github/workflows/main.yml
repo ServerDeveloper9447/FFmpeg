@@ -23,6 +23,7 @@ jobs:
           yasm
           gcc
           pkg-config
+          nasm
 
     - name: Clone FFmpeg
       shell: msys2 {0}

@@ -1,0 +1,62 @@
+name: Build Minimal FFmpeg
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-ffmpeg:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install MSYS2
+      uses: msys2/setup-msys2@v2
+      with:
+        install: >-
+          base-devel
+          git
+          make
+          yasm
+          gcc
+          pkg-config
+
+    - name: Clone FFmpeg
+      shell: msys2 {0}
+      run: |
+        git clone https://github.com/ServerDeveloper9447/FFmpeg.git ffmpeg
+        cd ffmpeg
+        git checkout n7.1
+
+    - name: Configure FFmpeg
+      shell: msys2 {0}
+      run: |
+        cd ffmpeg
+        ./configure \
+          --target-os=mingw32 \
+          --arch=x86_64 \
+          --enable-gpl \
+          --disable-everything \
+          --enable-ffmpeg \
+          --enable-protocol=gdigrab \
+          --enable-demuxer=gdigrab \
+          --enable-encoder=mpeg4 \
+          --enable-muxer=mp4 \
+          --enable-avdevice \
+          --enable-avformat \
+          --enable-avcodec \
+          --enable-swscale
+
+    - name: Build FFmpeg
+      shell: msys2 {0}
+      run: |
+        cd ffmpeg
+        make -j$(nproc)
+
+    - name: Upload ffmpeg.exe
+      uses: actions/upload-artifact@v4
+      with:
+        name: ffmpeg-minimal
+        path: ffmpeg/ffmpeg.exe

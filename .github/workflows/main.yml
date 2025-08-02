@@ -49,7 +49,12 @@ jobs:
           --enable-avdevice \
           --enable-avformat \
           --enable-avcodec \
-          --enable-swscale
+          --enable-swscale \
+          --disable-dtls \
+          --disable-protocol=dtls \
+          --disable-protocol=tls \
+          --disable-protocol=libsrt
+
 
     - name: Build FFmpeg
       shell: msys2 {0}

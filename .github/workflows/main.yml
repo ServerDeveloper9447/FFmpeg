@@ -29,7 +29,7 @@ jobs:
       run: |
         git clone https://github.com/ServerDeveloper9447/FFmpeg.git ffmpeg
         cd ffmpeg
-        git checkout n7.1
+        git checkout master
 
     - name: Configure FFmpeg
       shell: msys2 {0}

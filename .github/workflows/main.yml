@@ -50,7 +50,6 @@ jobs:
           --enable-avformat \
           --enable-avcodec \
           --enable-swscale \
-          --disable-dtls \
           --disable-protocol=dtls \
           --disable-protocol=tls \
           --disable-protocol=libsrt
